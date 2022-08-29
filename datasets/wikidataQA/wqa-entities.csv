@@ -1,0 +1,102 @@
+,question,entities,MuHeQA_NER,MuHeQA_PoS,MuHeQA_NER+PoS,FLERT,BERT,RoBERTA,MuHeQA_FLERT
+0,Who is the president of Poland?,['president of Poland'],['poland'],['Poland'],['poland'],['Poland'],['Poland'],['Poland'],['Poland']
+1,How many Turing awards have people from Austria won?,"['Turing awards', ' Austria']","['turing awards', 'austria']","['many Turing awards', 'Austria']","['many turing awards', 'austria']","['Turing', 'Austria']","['Turing', 'Austria']","['Turing awards', 'Austria']","['Austria', 'Turing']"
+2,Give me all countries that have won a FIFA World Cup,['FIFA World Cup'],['fifa world cup'],"['countries', 'FIFA World Cup']",['fifa world cup'],['FIFA World Cup'],['FIFA World Cup'],['FIFA World Cup'],['FIFA World Cup']
+3,What is the population of Chile?,['Chile'],['chile'],['Chile'],['chile'],['Chile'],['Chile'],['Chile'],['Chile']
+4,Who is the author of One Piece?,['One Piece'],[],['One Piece'],['one piece'],['One Piece'],['One Piece'],['One Piece'],['One Piece']
+5,Which musicians are from Sweden?,"['musicians', ' Sweden']",['sweden'],"['musicians', 'Sweden']",['sweden'],['Sweden'],['Sweden'],['Sweden'],['Sweden']
+6,How many movies has Tarantino directed?,['Tarantino'],['tarantino'],"['many movies', 'Tarantino']",['tarantino'],['Tarantino'],['Tarantino'],['Tarantino'],['Tarantino']
+7,Is New York bigger than Beijing?,"['New York', ' Beijing']","['new york', 'beijing']","['New York', 'Beijing']","['beijing', 'new york']","['New York', 'Beijing']","['New York', 'Beijing']","['New York', 'Beijing']","['Beijing', 'New York']"
+8,what countries are part of the European Union?,['European Union'],['european union'],"['countries', 'European Union']",['european union'],['European Union'],['European Union'],['European Union'],['European Union']
+9,What computer scientists were born after 1970?,['computer scientists'],[],"['computer scientists', '1970']","['computer scientists', '1970']",[],[],[],"['computer scientists', '1970']"
+10,Is Leonardo Dicaprio older than Joaquin Phoenix?,"['Leonardo Dicaprio', ' Joaquin Phoenix']","['leonardo dicaprio', 'joaquin phoenix']","['Leonardo Dicaprio', 'Joaquin Phoenix']","['leonardo dicaprio', 'joaquin phoenix']","['Leonardo Dicaprio', 'Joaquin Phoenix']","['Leonardo Dicap', 'Joaquin Phoenix']","['Leonardo Dicaprio', 'Joaquin Phoenix']","['Joaquin Phoenix', 'Leonardo Dicaprio']"
+11,In which country is the Museo del Prado located?,['Museo del Prado'],['museo del prado'],"['country', 'Museo del Prado']",['museo del prado'],['Museo del Prado'],['Museo del Prado'],['Museo del Prado'],['Museo del Prado']
+12,When did Caesars Palace open?,['Caesars Palace'],['caesars palace'],['Caesars Palace'],['caesars palace'],['Caesars Palace'],['Caesars Palace'],['Caesars Palace'],['Caesars Palace']
+13,Which political party was Abraham Lincoln a member of?,['Abraham Lincoln'],['abraham lincoln'],"['political party', 'Abraham Lincoln']",['abraham lincoln'],['Abraham Lincoln'],['Abraham Lincoln'],['Abraham Lincoln'],['Abraham Lincoln']
+14,Which paintings feature a banana?,"['banana', ' paintings']",[],"['paintings', 'banana']","['paintings', 'banana']",[],[],[],"['paintings', 'banana']"
+15,Do any national flags use pink?,"['national flags', ' pink']",[],"['national flags', 'pink']","['national flags', 'pink']",[],[],[],"['national flags', 'pink']"
+16,When did Ian Curtis commit suicide?,['Ian Curtis'],['ian curtis'],"['Ian Curtis', 'suicide']",['ian curtis'],['Ian Curtis'],['Ian Curtis'],['Ian Curtis'],['Ian Curtis']
+17,Where can I see paintings by El Greco?,['El Greco'],['el greco'],['El Greco'],['el greco'],['El Greco'],['El Greco'],['El Greco'],['El Greco']
+18,In which movies did Al Pacino and Robert de Niro appear together?,"['Al Pacino', ' Robert de Niro']","['al pacino', 'robert de niro']","['movies', 'Al Pacino and Robert de Niro']",['al pacino and robert de niro'],"['Al Pacino', 'Robert de Niro']","['Al Pacino', 'Robert de Niro']","['Al Pacino', 'Robert de Niro']","['Al Pacino', 'Robert de Niro']"
+19,Who is the youngest head of state in the world?,[''],[],['world'],['world'],[],[],[],['world']
+20,Which mountains are on Mars?,"['Mars', ' mountain']",['mars'],"['mountains', 'Mars']",['mars'],['Mars'],['Mars'],['Mars'],['Mars']
+21,What alcoholic drinks are made with orange?,"['alcoholic drinks', ' orange']",[],"['alcoholic drinks', 'orange']","['alcoholic drinks', 'orange']",[],[],[],"['alcoholic drinks', 'orange']"
+22,Which video games have a fox character?,"['fox', ' video games']",['fox'],"['video games', 'fox character']",['fox character'],[],[],[],"['video games', 'fox character']"
+23,How many astronauts studied at MIT?,"['astronauts', ' MIT']",['mit'],"['many astronauts', 'MIT']",['mit'],['MIT'],['MIT'],['MIT'],['MIT']
+24,When was the first exoplanet discovered?,['exoplanet'],[],['first exoplanet'],['first exoplanet'],[],[],[],['first exoplanet']
+25,Which movies were directed by siblings?,['movies'],[],"['movies', 'siblings']","['movies', 'siblings']",[],[],[],"['movies', 'siblings']"
+26,What buildings are named after JFK?,"['JFK', ' buildings']",['jfk'],"['buildings', 'JFK']",['jfk'],['JFK'],['JF'],['JFK'],['JFK']
+27,When was Hey Jude released?,['Hey Jude'],['hey jude'],['Hey Jude'],['hey jude'],['Hey Jude'],['Hey Jude'],['Hey Jude'],['Hey Jude']
+28,Which countries have multiple capitals?,[''],[],"['countries', 'multiple capitals']","['countries', 'multiple capitals']",[],[],[],"['countries', 'multiple capitals']"
+29,Which video games are known to be NP complete?,"['video games', ' NP complete']",[],"['video games', 'NP complete']","['video games', 'np complete']",[],['N'],[],"['video games', 'np complete']"
+30,What is the most common cause of death among F1 drivers?,['F1 drivers'],['f1'],['F1 drivers'],['f1 drivers'],['F1'],['F1'],['F1'],['F1']
+31,Which asthma drugs are carcinogenic?,"['asthma', ' carcinogenic']",[],['asthma drugs'],['asthma drugs'],[],[],[],['asthma drugs']
+32,Which countries are named after plants?,"['countries', ' plants']",[],"['countries', 'plants']","['countries', 'plants']",[],[],[],"['countries', 'plants']"
+33,Which telescopes are based in Chile?,"['Chile', ' telescopes']",['chile'],"['telescopes', 'Chile']",['chile'],['Chile'],['Chile'],['Chile'],['Chile']
+34,What is the chemical symbol for Potassium?,['Potassium'],['potassium'],['Potassium'],['potassium'],[],['Potas'],[],['potassium']
+35,What is the Twitter account of Elon Musk?,['Elon Musk'],['elon musk'],['Elon Musk'],['elon musk'],"['Twitter', 'Elon Musk']",['Elon Musk'],"['Twitter', 'Elon Musk']","['Elon Musk', 'Twitter']"
+36,Who is the CEO of eBay?,['eBay'],['ebay'],['eBay'],['ebay'],['eBay'],['eBay'],['eBay'],['eBay']
+37,Which alkali metal is in period 4,"['alkali metal', ' period 4']",[],"['alkali metal', 'period 4']","['alkali metal', 'period 4']",[],[],[],"['alkali metal', 'period 4']"
+38,Where can I find platypuses?,['platypuses'],[],['platypuses'],['platypuses'],[],[],[],['platypuses']
+39,Which endangered species can be found in Chile?,"['endangered species', ' Chile']",['chile'],"['species', 'Chile']",['chile'],['Chile'],['Chile'],['Chile'],['Chile']
+40,Which country has the most nuclear power plants?,['nuclear power plants'],[],"['country', 'nuclear power plants']","['country', 'nuclear power plants']",[],[],[],"['country', 'nuclear power plants']"
+41,Which country has the most official languages?,['country'],[],"['country', 'official languages']","['country', 'official languages']",[],[],[],"['country', 'official languages']"
+42,When did ICLR start?,['ICLR'],['iclr'],['ICLR'],['iclr'],['ICLR'],['I'],['ICLR'],['ICLR']
+43,Which country that does not border Germany has German as an official language?,"['Germany', ' German']","['germany', 'german']","['country', 'Germany', 'official language']",['germany'],"['Germany', 'German']","['Germany', 'German']","['Germany', 'German']","['German', 'Germany']"
+44,What is the national anthem of Greece?,['Greece'],['greece'],['Greece'],['greece'],['Greece'],['Greece'],['Greece'],['Greece']
+45,Which pair of directors have co-directed the most movies together?,['movies'],[],"['directors', 'movies']","['directors', 'movies']",[],[],[],"['directors', 'movies']"
+46,Which company makes Twix?,['Twix'],['twix'],"['company', 'Twix']",['twix'],['Twix'],['T'],['Twix'],['Twix']
+47,What is the nearest black hole?,['black hole'],[],['black hole'],['black hole'],[],[],[],['black hole']
+48,Which statues are made of copper?,"['statue', ' copper']",[],"['statues', 'copper']","['statues', 'copper']",[],[],[],"['statues', 'copper']"
+49,Which conferences focus on machine learning?,"['conferences', ' machine learning']",[],"['conferences', 'machine learning']","['conferences', 'machine learning']",[],[],[],"['conferences', 'machine learning']"
+50,Which cities are named after an apostle?,"['cities', ' apostle']",[],"['cities', 'apostle']","['cities', 'apostle']",[],[],[],"['cities', 'apostle']"
+51,What chocolate bars are made by Nestle?,"['chocolate bars', ' Nestle']",['nestle'],"['chocolate bars', 'Nestle']",['nestle'],['Nestle'],['Nestle'],['Nestle'],['Nestle']
+52,Who was president before Nixon?,"['president', ' Nixon']",['nixon'],['Nixon'],['nixon'],['Nixon'],['Nixon'],['Nixon'],['Nixon']
+53,How many books are in the Hitchhiker's Guide to the Galaxy series?,"['""Hitchhikers Guide to the Galaxy""']","[""hitchhiker's guide to the galaxy""]","['many books', 'Hitchhiker', 'Galaxy series']","[""hitchhiker's guide to the galaxy""]","[""Hitchhiker 's Guide to the Galaxy""]","[""Hitchhiker's Guide to the Galaxy""]","[""Hitchhiker's Guide to the Galaxy""]","[""Hitchhiker 's Guide to the Galaxy""]"
+54,Which Simpsons characters were not born in Springfield?,"['Simpsons', ' characters', ' Springfield']","['simpsons', 'springfield']","['Simpsons characters', 'Springfield']","['simpsons characters', 'springfield']","['Simpsons', 'Springfield']","['Simpsons', 'Springfield']","['Simpsons', 'Springfield']","['Springfield', 'Simpsons']"
+55,When was sparkling water invented?,['sparkling water'],[],['sparkling water'],['sparkling water'],[],[],[],['sparkling water']
+56,What articles discuss knowledge graph embeddings?,"['knowledge graph embeddings', ' articles']",[],"['articles', 'knowledge graph embeddings']","['articles', 'knowledge graph embeddings']",[],[],[],"['articles', 'knowledge graph embeddings']"
+57,Who is the tallest basketball player of all time?,['basketball player'],[],['time'],['time'],[],[],[],['time']
+58,How old is Justin Bieber?,['Justin Bieber'],['justin bieber'],['old Justin Bieber'],['old justin bieber'],['Justin Bieber'],['Justin Bieber'],['Justin Bieber'],['Justin Bieber']
+59,Whose birthday is today?,[''],[],"['birthday', 'today']","['birthday', 'today']",[],[],[],"['birthday', 'today']"
+60,Is Michael Jackson the oldest child?,['Michael Jackson'],['michael jackson'],"['Michael Jackson', 'child']",['michael jackson'],['Michael Jackson'],['Michael Jackson'],['Michael Jackson'],['Michael Jackson']
+61,Which countries have a female head of state?,['female'],[],"['countries', 'state']","['countries', 'state']",[],[],[],"['countries', 'state']"
+62,Which countries have a monarchy?,"['countries', ' monarchy']",[],"['countries', 'monarchy']","['countries', 'monarchy']",[],[],[],"['countries', 'monarchy']"
+63,Which universities are based in Peru?,"['universities', ' Peru']",['peru'],"['universities', 'Peru']",['peru'],['Peru'],['Peru'],['Peru'],['Peru']
+64,Which element precedes tin in the periodic table?,['tin'],['periodic table'],"['element', 'periodic table']",['periodic table'],[],[],[],"['element', 'periodic table']"
+65,Which element has the lowest melting point?,['element'],[],"['element', 'melting point']","['element', 'melting point']",[],[],[],"['element', 'melting point']"
+66,Which language is the official language of the most countries?,['countries'],[],"['language', 'countries']","['language', 'countries']",[],[],[],"['language', 'countries']"
+67,Which culinary nuts are not botanical nuts?,"['culinary nuts', ' botanical nuts']",[],"['culinary nuts', 'botanical nuts']","['culinary nuts', 'botanical nuts']",[],[],[],"['culinary nuts', 'botanical nuts']"
+68,Which colours are named after fruits?,"['colours', ' fruits']",[],"['colours', 'fruits']","['colours', 'fruits']",[],[],[],"['colours', 'fruits']"
+69,Which mayors were not human?,"['mayors', ' human']",[],['mayors'],['mayors'],[],[],[],['mayors']
+70,Which polygonal numbers are also pronic?,"['polygonal numbers', ' pronic']",[],['polygonal numbers'],['polygonal numbers'],[],[],[],['polygonal numbers']
+71,What's the next prime after 51?,"['prime', ' 51']",[],['51'],['51'],[],[],[],['51']
+72,What animal can hear the highest frequency?,[''],[],"['animal', 'frequency']","['animal', 'frequency']",[],[],[],"['animal', 'frequency']"
+73,Which countries use the same plug as Canada?,"['countries', ' Canada']",['canada'],"['countries', 'Canada']",['canada'],['Canada'],['Canada'],['Canada'],['Canada']
+74,Who has won more than one type of Nobel Prize?,['Nobel Prize'],['nobel'],['Nobel Prize'],['nobel prize'],['Nobel Prize'],['Nobel Prize'],['Nobel Prize'],['Nobel Prize']
+75,Which city has the most catedrals?,"['city', ' catedrals']",[],"['city', 'catedrals']","['city', 'catedrals']",[],[],[],"['city', 'catedrals']"
+76,What make of car is a Corolla?,['Corolla'],['corolla'],"['car', 'Corolla']",['corolla'],['Corolla'],['Corolla'],['Corolla'],['Corolla']
+77,What is the tallest mountain in the Andes?,"['Mountain', ' Andes']",['andes'],['Andes'],['andes'],['Andes'],['Andes'],['Andes'],['Andes']
+78,Which American president had the most wives?,['American president'],['american'],"['American president', 'wives']",['american president'],['American'],['American'],['American'],['American']
+79,Which countries drive on the left?,['left'],[],"['countries', 'left']","['countries', 'left']",[],[],[],"['countries', 'left']"
+80,When was the Rubix cube invented?,['Rubix cube'],['rubix'],['Rubix cube'],['rubix cube'],[],['Rubix'],['Rubix'],['rubix cube']
+81,Which conferences were organized by Turing award winners?,"['Turing award', ' conferences']",['turing award'],"['conferences', 'Turing award winners']",['turing award winners'],['Turing'],['Turin'],['Turing award'],['Turing']
+82,What video games are made by the developer of League of Legends?,"['video games', ' League of Legends']",['league of legends'],"['video games', 'Legends']",['league of legends'],['League of Legends'],['League of Legends?'],['League of Legends'],['League of Legends']
+83,"Which writers speak French, Arabic and Japanese?","['writers', ' French', ' Arabic', ' Japanese']","['french', 'arabic', 'japanese']","['writers', 'French', 'Arabic and Japanese']","['french', 'arabic and japanese']","['French', 'Arabic', 'Japanese']","['French', 'Arabic', 'Japanese']","['French', 'Arabic', 'Japanese']","['Arabic', 'French', 'Japanese']"
+84,Which pandemic lasted the longest?,['pandemic'],[],['pandemic'],['pandemic'],[],[],[],['pandemic']
+85,Give me all whiskey distilleries in Ireland.,"['whiskey distilleries', ' Ireland']",['ireland'],['Ireland'],['ireland'],['Ireland'],['Ireland'],['Ireland'],['Ireland']
+86,Find animals with Twitter accounts.,['animals'],[],['Twitter accounts'],['twitter accounts'],['Twitter'],[],['Twitter'],['Twitter']
+87,How many regions of France are there?,['regions of France'],['france'],['France'],['france'],['France'],['France'],['France'],['France']
+88,Which living people have an element named after them?,"['people', ' chemical element']",[],"['people', 'element']","['people', 'element']",[],[],[],"['people', 'element']"
+89,Which Chilean companies have U.S. parent companies?,"['companies', ' Chilean', ' U.S.']","['chilean', 'u.s']","['Chilean companies', 'U.S. parent companies']","['chilean companies', 'u.s. parent companies']","['Chilean', 'U.S.']","['Chilean', 'U.S.']","['Chilean', 'U.S.']","['Chilean', 'U.S.']"
+90,Did Tarantino direct a movie last year?,['Tarantino'],['tarantino'],"['Tarantino', 'movie last year']",['tarantino'],['Tarantino'],['Tarantino'],['Tarantino'],['Tarantino']
+91,Which smartphones are made in China?,"['smartphones', ' China']",['china'],"['smartphones', 'China']",['china'],['China'],['China'],['China'],['China']
+92,Which animals have a Unicode character?,['animals'],['unicode'],"['animals', 'Unicode character']",['unicode character'],['Unicode'],['Unicode'],['Unicode'],['Unicode']
+93,Which movie of the past decade has won the most Academy Awards?,"['movie', ' Academy Awards']",['academy awards'],"['past decade', 'Academy Awards']",['academy awards'],['Academy Awards'],['Academy Awards'],['Academy Awards'],['Academy Awards']
+94,Which diesel cars are made by Honda?,"['diesel', ' cars', ' Honda']",['honda'],"['diesel cars', 'Honda']",['honda'],['Honda'],['Honda'],['Honda'],['Honda']
+95,Who was the winner of the latest Fields Medal?,['Fields Medal'],[],['Fields Medal'],['fields medal'],['Fields Medal'],['Fields Medal'],['Fields Medal'],['Fields Medal']
+96,Who wrote The Old Man and the Sea?,['The Old Man and the Sea'],['the old man and the sea'],"['Old Man and', 'Sea']",['the old man and the sea'],['The Old Man and the Sea'],['The Old Man and the Sea'],['The Old Man and the Sea'],['The Old Man and the Sea']
+97,Which YouTube channels talk about maths?,"['YouTube channels', ' maths']",[],"['YouTube channels', 'maths']","['youtube channels', 'maths']",['YouTube'],[],['YouTube'],['YouTube']
+98,List Italian sauces.,"['sauce', ' Italy']",['italian'],['Italian sauces'],['italian sauces'],['Italian'],['Italian'],['Italian'],['Italian']
+99,What diseases are associated with the gene FGF14?,['FGF14'],['fgf'],"['diseases', 'gene FGF14']",['gene fgf14'],[],['F'],['FGF14'],"['diseases', 'gene fgf14']"
+100,What ultra-cool dwarfs have been found in the constellation Aquarius?,"['ultra-cool dwarfs', ' Aquarius']",['aquarius'],"['ultra-cool dwarfs', 'constellation Aquarius']",['constellation aquarius'],['Aquarius'],['Aquarius'],['Aquarius'],['Aquarius']

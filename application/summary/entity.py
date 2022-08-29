@@ -34,9 +34,9 @@ class Entity:
 				entity += " " + word
 			else:
 				entities.append(entity)
-				entity = word
+				entity = word		
 			index = token['index']
 			offset = token['end']
-			if (len(entity) > 0):    
-				entities.append(entity)
+		if (len(entity) > 0):    
+			entities.append(entity)
 		return entities
