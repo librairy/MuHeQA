@@ -1,6 +1,6 @@
 ,question,entities,MuHeQA_Keywords,FLERT_NER,BERT_NER,RoBERTA_NER
 0,Who is the president of Poland?,['president of Poland'],['poland'],['Poland'],['Poland'],['Poland']
-1,How many Turing awards have people from Austria won?,"['Turing awards', ' Austria']","['austria', 'many turing awards']","['Turing', 'Austria']","['Turing', 'Austria']","['Turing awards', 'Austria']"
+1,How many Turing awards have people from Austria won?,"['Turing awards', ' Austria']","['many turing awards', 'austria']","['Turing', 'Austria']","['Turing', 'Austria']","['Turing awards', 'Austria']"
 2,Give me all countries that have won a FIFA World Cup,['FIFA World Cup'],['fifa world cup'],['FIFA World Cup'],['FIFA World Cup'],['FIFA World Cup']
 3,What is the population of Chile?,['Chile'],['chile'],['Chile'],['Chile'],['Chile']
 4,Who is the author of One Piece?,['One Piece'],['one piece'],['One Piece'],['One Piece'],['One Piece']
@@ -81,13 +81,13 @@
 79,When was the Rubix cube invented?,['Rubix cube'],['rubix cube'],[],['Rubix'],['Rubix']
 80,Which conferences were organized by Turing award winners?,"['Turing award', ' conferences']",['turing award winners'],['Turing'],['Turin'],['Turing award']
 81,What video games are made by the developer of League of Legends?,"['video games', ' League of Legends']",['league of legends'],['League of Legends'],['League of Legends?'],['League of Legends']
-82,"Which writers speak French, Arabic and Japanese?","['writers', ' French', ' Arabic', ' Japanese']","['french', 'arabic and japanese']","['French', 'Arabic', 'Japanese']","['French', 'Arabic', 'Japanese']","['French', 'Arabic', 'Japanese']"
+82,"Which writers speak French, Arabic and Japanese?","['writers', ' French', ' Arabic', ' Japanese']","['arabic and japanese', 'french']","['French', 'Arabic', 'Japanese']","['French', 'Arabic', 'Japanese']","['French', 'Arabic', 'Japanese']"
 83,Which pandemic lasted the longest?,['pandemic'],['pandemic'],[],[],[]
 84,Give me all whiskey distilleries in Ireland.,"['whiskey distilleries', ' Ireland']",['ireland'],['Ireland'],['Ireland'],['Ireland']
 85,Find animals with Twitter accounts.,['animals'],['twitter accounts'],['Twitter'],[],['Twitter']
 86,How many regions of France are there?,['regions of France'],['france'],['France'],['France'],['France']
 87,Which living people have an element named after them?,"['people', ' chemical element']","['people', 'element']",[],[],[]
-88,Which Chilean companies have U.S. parent companies?,"['companies', ' Chilean', ' U.S.']","['chilean companies', 'u.s. parent companies']","['Chilean', 'U.S.']","['Chilean', 'U.S.']","['Chilean', 'U.S.']"
+88,Which Chilean companies have U.S. parent companies?,"['companies', ' Chilean', ' U.S.']","['u.s. parent companies', 'chilean companies']","['Chilean', 'U.S.']","['Chilean', 'U.S.']","['Chilean', 'U.S.']"
 89,Did Tarantino direct a movie last year?,['Tarantino'],['tarantino'],['Tarantino'],['Tarantino'],['Tarantino']
 90,Which smartphones are made in China?,"['smartphones', ' China']",['china'],['China'],['China'],['China']
 91,Which animals have a Unicode character?,['animals'],['unicode character'],['Unicode'],['Unicode'],['Unicode']
