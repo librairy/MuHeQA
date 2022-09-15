@@ -36,3 +36,4 @@ The MuHeQA (Multiple and Heterogeneous Question-Answering) system creates natura
       ````
       conda activate .muheqa
       ````
+6. Install requirements
