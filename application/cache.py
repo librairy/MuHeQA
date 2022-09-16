@@ -26,7 +26,7 @@ class Cache:
 
 	def get(self,key):
 		key_value = self.get_hash(key)
-		self.logger.debug("reading value of "+ key_value + " from cache")
+		self.logger.debug("reading value of "+ key_value + " from cache:" + self.file_cache.cache_dir + "...")
 		return self.file_cache[key_value]
 
 	def set(self,key,value):

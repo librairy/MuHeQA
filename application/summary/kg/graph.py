@@ -7,16 +7,19 @@ nltk.download('wordnet')
 from nltk.stem import WordNetLemmatizer
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
+import unidecode
 
 
 class Graph:
 
 	def __init__(self):
-		self.sentence_model = SentenceTransformer("sentence-transformers/all-distilroberta-v1")
-		self.lemmatizer = WordNetLemmatizer()
-		self.cache = ch.Cache("Graph")
 		self.logger = logging.getLogger('muheqa')
 		self.logger.debug("initializing Graph Explorer...")
+		self.cache = ch.Cache("Graph")
+		self.logger.debug("loading sentence-transformer...")
+		self.sentence_model = SentenceTransformer("sentence-transformers/all-distilroberta-v1")
+		self.logger.debug("loading wordnet lemmatizer...")
+		self.lemmatizer = WordNetLemmatizer()
 
 	def lemmatize(self, text):
 	    result = []
@@ -28,8 +31,8 @@ class Graph:
 		cache_key = ref_text + ",".join(texts)
 		if (self.cache.exists(cache_key)):
 			return self.cache.get(cache_key)
-		sentences = [ref_text]
-		sentences.extend(texts)
+		sentences = [unidecode.unidecode(ref_text.strip())]
+		sentences.extend([unidecode.unidecode(t.strip()) for t in texts])
 		embeddings = self.sentence_model.encode(sentences)
 		sim_list = []
 		index=0

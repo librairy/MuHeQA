@@ -8,12 +8,65 @@ from SPARQLWrapper import SPARQLWrapper, JSON
 class Wikipedia:
 
 	def __init__(self):
+		self.logger = logging.getLogger('muheqa')
+		self.logger.debug("initializing Wikipedia retriever...")
 		self.sparql = SPARQLWrapper("https://query.wikidata.org/sparql",agent='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36')
 		self.sparql.setReturnFormat(JSON)
 		self.sparql.setTimeout(timeout=60)
 		self.cache = ch.Cache("Wikipedia")
-		self.logger = logging.getLogger('muheqa')
-		self.logger.debug("initializing Wikipedia retriever...")
+
+	def get_property_value(self,filter):
+		if (self.cache.exists(filter)):
+			return self.cache.get(filter)
+		query = """
+		PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+		PREFIX bd: <http://www.bigdata.com/rdf#>
+		PREFIX wd: <http://www.wikidata.org/entity/> 
+		PREFIX wdt: <http://www.wikidata.org/prop/direct/>
+		PREFIX wikibase: <http://wikiba.se/ontology#>
+		SELECT distinct ?obj ?objLabel
+		WHERE
+		FILTER 
+		LIMIT 250
+		"""
+		query_text = query.replace('FILTER',filter)
+		self.sparql.setQuery(query_text)
+		result = []
+		while (len(result) == 0):
+			try:
+				ret = self.sparql.queryAndConvert() 
+				for r in ret["results"]["bindings"]:
+					id = r['obj']['value']
+					value = id
+					if ('objLabel' in r) and ('value' in r['objLabel']):
+						value = r['objLabel']['value']                
+					if (' id ' not in value.lower()) and (' link ' not in value.lower()) and ('has abstract' not in value.lower()) and ('wiki' not in value.lower()) and ('instance of' not in value.lower()):
+						result.append({'id':id, 'value':value})
+			except Exception as e:
+				print("Error on wikidata property value query:",e,"->",query_text)
+			break
+		self.cache.set(filter,result)
+		return result	
+
+
+	def get_forward_property_value(self,entity,property): 
+		query_filter = """
+			{
+				wd:ENTITY wdt:PROPERTY ?obj .
+				SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+			}                            
+			"""
+		return self.get_property_value(query_filter.replace("ENTITY",entity).replace("PROPERTY",property))
+
+	def get_backward_property_value(self,entity,property):
+		query_filter = """
+			{
+				?obj wdt:PROPERTY wd:ENTITY .
+				SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
+			}                            
+			"""
+		return self.get_property_value(query_filter.replace("ENTITY",entity).replace("PROPERTY",property))	
+
 
 	def get_properties(self, entity):
 	  if (self.cache.exists(entity)):
@@ -49,7 +102,7 @@ class Wikipedia:
 	  self.cache.set(entity,result)
 	  return result
 
-	def get_resources(self, label):
+	def find_resources(self, label):
 	    if (label==""):
 	        return candidates
 	    if (self.cache.exists(label)):
