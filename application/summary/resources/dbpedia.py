@@ -98,47 +98,48 @@ class DBpedia:
         return result
 
     def find_resources(self, label):
-        self.logger.debug("getting summary from DBpedia for resource:" + label)
+        self.logger.debug("getting summary from DBpedia for label: " + label)
+        candidates = []
         if (label == ""):
             return candidates
         if (self.cache.exists(label)):
-            return self.cache.get(label)
-        candidates = []
+            print("Cacheeee")
+            return self.cache.get(label)        
         headers = {
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
         query_path = "https://lookup.dbpedia.org/api/search?format=JSON&query=QUERY_TEXT&maxResults=10"
         request = query_path.replace("QUERY_TEXT", label)
         r = requests.get(request, headers=headers)
         if (len(r.json()['docs']) == 0):
-            r = requests.get(query_path.replace(
-                "QUERY_TEXT", lemmatize(label)))
+            r = requests.get(query_path.replace("QUERY_TEXT", lemmatize(label)))
+            self.logger.debug("no resources found in DBpedia for label: " + label + ", retried with: " + lemmatize(label))
             size = len(label.split(" "))
             index = 1
             while(('search' in r.json()) and (len(r.json()['search']) == 0) and (index < size)):
                 query_label = " ".join(label.split(" ")[index:])
                 index += 1
                 r = requests.get(query_path.replace("QUERY_TEXT", query_label))
+                self.logger.debug("retried with: " + query_label)
         for answer in r.json()['docs']:
+            self.logger.debug("DBpedia candidate: " + str(answer))
             description, label, id = "", "", ""
             properties = []
             if ('comment' in answer) and (len(answer['comment']) > 0):
-                description = answer['comment'][0].replace(
-                    "<B>", "").replace("</B>", "")
+                description = answer['comment'][0].replace("<B>", "").replace("</B>", "")
             if ('resource' in answer) and (len(answer['resource']) > 0):
-                id = answer['resource'][0].split(
-                    "http://dbpedia.org/resource/")[1]
+                id = answer['resource'][0].split("http://dbpedia.org/resource/")[1]
                 properties = self.get_properties(id)
             if ('label' in answer) and (len(answer['label']) > 0):
-                label = answer['label'][0].replace(
-                    "<B>", "").replace("</B>", "")
+                label = answer['label'][0].replace("<B>", "").replace("</B>", "")
             else:
                 label = id
+
             candidate = {
                 'label': label,
                 'id': id,
                 'description': description,
                 'properties': properties
             }
-        candidates.append(candidate)
+            candidates.append(candidate)
         self.cache.set(label, candidates)
         return candidates
