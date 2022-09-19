@@ -121,7 +121,6 @@ class DBpedia:
                 r = requests.get(query_path.replace("QUERY_TEXT", query_label))
                 self.logger.debug("retried with: " + query_label)
         for answer in r.json()['docs']:
-            self.logger.debug("DBpedia candidate: " + str(answer))
             description, label, id = "", "", ""
             properties = []
             if ('comment' in answer) and (len(answer['comment']) > 0):
