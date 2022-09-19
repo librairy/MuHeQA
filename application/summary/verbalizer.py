@@ -35,7 +35,7 @@ class Verbalizer:
 		self.logger.debug("Top KG Resources: " + str(len(top_resources)))
 		# get top MAX properties for each resource
 		for resource in top_resources:
-			self.logger.debug(" Resource: " + str(resource['id'] + str(resource['label'])))
+			self.logger.debug(" Resource ID:" + str(resource['id'] +  ", label:" +str(resource['label'])))
 			if ('properties' in resource):
 				properties = [{ 'id':r['id'] , 'text':r['value']} for r in resource['properties']]
 				top_properties = self.graph.get_top_similar(query,properties)

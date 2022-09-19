@@ -103,40 +103,40 @@ class Wikipedia:
 	  return result
 
 	def find_resources(self, label):
-	    if (label==""):
-	        return candidates
-	    if (self.cache.exists(label)):
-	    	return self.cache.get(label)
-	    candidates = []
-	    headers = { 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
-	    query_path = "https://www.wikidata.org/w/api.php?action=wbsearchentities&search=QUERY_TEXT&language=en&limit=10&type=item&format=json"
-	    request = query_path.replace("QUERY_TEXT",label)
-	    r = requests.get(request,headers = headers)
-	    if (len(r.json()['search']) == 0):
-	      lemma = lemmatize(label)	
-	      self.logger.debug("retry search by lemma:" + str(lemma))
-	      r = requests.get(query_path.replace("QUERY_TEXT",lemma))
-	      size = len(label.split(" "))
-	      index = 1
-	      while(('search' in r.json()) and (len(r.json()['search']) == 0) and (index<size)):
-	        query_label = " ".join(label.split(" ")[index:])
-	        index += 1  
-	        self.logger.debug("retry search by Partial Label:" + query_label)
-	        r = requests.get(query_path.replace("QUERY_TEXT",query_label)) 
-	    #self.logger.debug("Response:" + str(r.json()))
-	    for answer in r.json()['search']:
-	        description = ""
-	        if ('description' in answer['display']):
-	          description = answer['display']['description']['value']
-	          if 'disambiguation' in description:
-	                continue
-	        candidate = {
-	            'label': answer['display']['label']['value'],
-	            'id':answer['id'],
-	            'description' : description,
-	            'properties' : self.get_properties(answer['id'])
-	        }
-	        candidates.append(candidate)
-	    self.cache.set(label,candidates)	    
-	    return candidates  
+		self.logger.debug("getting summary from Wikipedia for resource:" + label)
+		if (label==""):
+			return candidates
+		if (self.cache.exists(label)):
+			return self.cache.get(label)
+		candidates = []
+		headers = { 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
+		query_path = "https://www.wikidata.org/w/api.php?action=wbsearchentities&search=QUERY_TEXT&language=en&limit=10&type=item&format=json"
+		request = query_path.replace("QUERY_TEXT",label)
+		r = requests.get(request,headers = headers)
+		if (len(r.json()['search']) == 0):
+			lemma = lemmatize(label)	
+			self.logger.debug("retry search by lemma:" + str(lemma))
+			r = requests.get(query_path.replace("QUERY_TEXT",lemma))
+			size = len(label.split(" "))
+			index = 1
+			while(('search' in r.json()) and (len(r.json()['search']) == 0) and (index<size)):
+				query_label = " ".join(label.split(" ")[index:])
+				index += 1  
+				self.logger.debug("retry search by Partial Label:" + query_label)
+				r = requests.get(query_path.replace("QUERY_TEXT",query_label)) 
+		for answer in r.json()['search']:
+			description = ""
+			if ('description' in answer['display']):
+				description = answer['display']['description']['value']
+				if 'disambiguation' in description:
+					continue
+			candidate = {
+				'label': answer['display']['label']['value'],
+				'id':answer['id'],
+				'description' : description,
+				'properties' : self.get_properties(answer['id'])
+				}
+			candidates.append(candidate)
+		self.cache.set(label,candidates)	    
+		return candidates  
 

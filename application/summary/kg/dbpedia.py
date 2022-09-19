@@ -1,5 +1,6 @@
 import logging
 import requests
+import unidecode
 import application.cache as ch
 
 from SPARQLWrapper import SPARQLWrapper, JSON
@@ -43,7 +44,8 @@ class DBpedia:
                     if ('label' in r) and ('value' in r['label']):
                         value = r['label']['value']
                     if (' id ' not in value.lower()) and (' link ' not in value.lower()) and ('has abstract' not in value.lower()) and ('wiki' not in value.lower()) and ('instance of' not in value.lower()):
-                        result.append({'id': id, 'value': value})
+                        result.append(
+                            {'id': id, 'value': unidecode.unidecode(value).replace("\n*","")})
             except Exception as e:
                 print("Error on wikidata property value query:",
                       e, "->", query_text)
@@ -94,6 +96,7 @@ class DBpedia:
         return result
 
     def find_resources(self, label):
+        self.logger.debug("getting summary from DBpedia for resource:" + label)
         if (label == ""):
             return candidates
         if (self.cache.exists(label)):
@@ -122,7 +125,7 @@ class DBpedia:
             if ('resource' in answer) and (len(answer['resource']) > 0):
                 id = answer['resource'][0].split(
                     "http://dbpedia.org/resource/")[1]
-                properties = get_dbpedia_properties(id, use_cache)
+                properties = self.get_properties(id)
             if ('label' in answer) and (len(answer['label']) > 0):
                 label = answer['label'][0].replace(
                     "<B>", "").replace("</B>", "")
