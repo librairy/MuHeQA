@@ -36,4 +36,26 @@ The MuHeQA (Multiple and Heterogeneous Question-Answering) system creates natura
       ````
       conda activate .muheqa
       ````
-6. Install requirements
+6. Download the [answer classifier](https://delicias.dia.fi.upm.es/nextcloud/index.php/s/Jp5FeoBn57c8k4M) and unzip into the root project directory. The folder `resources_dir/` is created.
+      ````
+      wget -O resources.zip https://delicias.dia.fi.upm.es/nextcloud/index.php/s/Jp5FeoBn57c8k4M/download
+      unzip resources.zip
+      ````
+7. Install dependencies
+      ````
+      pip install -r requirements.txt
+      ````
+
+## M1 Environments (only for Apple's M1 devices)
+1. Install TensorFlow dependencies
+      ````
+      conda install -c apple tensorflow-deps
+      ````
+2. Install base TensorFlow
+      ````
+      pip install tensorflow-macos
+      ````
+3. Install tensorflow-metal plugin
+      ````
+      pip install tensorflow-metal
+      ````
