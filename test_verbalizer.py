@@ -9,5 +9,5 @@ query = "What position does Carlos Gomez play?"
 keyword = "Carlos Gomez"
 
 print("verbalizing text...")
-result = verbalizer.get_text(query,keyword,1,True,True,False)
+result = verbalizer.get_text(query,keyword,1,True,True,True)
 print("Result: ", result)

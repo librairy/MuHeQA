@@ -4,11 +4,11 @@ import application.summary.concept as cp
 import application.summary.entity as ent
 import unidecode
 
-class Keyword:
+class Keyword_Discovery:
 
 	def __init__(self):
 		self.logger = logging.getLogger('muheqa')
-		self.logger.debug("initializing Keyword class instance...")
+		self.logger.debug("initializing Keyword Discovery class instance...")
 
 		self.entity_discovery = ent.Entity()
 		self.concept_discovery = cp.Concept()

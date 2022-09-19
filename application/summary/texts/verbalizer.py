@@ -1,20 +1,19 @@
 import logging
 import application.cache as ch
-import application.summary.kg.graph as kg_graph
-import application.summary.kg.wikipedia as kg_wikipedia
-import application.summary.kg.dbpedia as kg_dbpedia
+import application.summary.resources.graph as kg_graph
+import application.summary.resources.wikipedia as kg_wikipedia
+import application.summary.resources.dbpedia as kg_dbpedia
+import application.summary.resources.d4c as db_d4c
+
 
 
 class Verbalizer:
 
 	def __init__(self):
-		self.cache = ch.Cache("Verbalizer")
-		self.logger = logging.getLogger('muheqa')
+		self.cache 		= ch.Cache("Verbalizer")
+		self.logger 	= logging.getLogger('muheqa')
 		self.logger.debug("initializing Verbalizer ...")
-
 		self.graph 		= kg_graph.Graph()
-		self.wikipedia 	= kg_wikipedia.Wikipedia()
-		self.dbpedia 	= kg_dbpedia.DBpedia()
 		
 	def property_to_text(self,s,p,o):
 		if (len(o)==0):
@@ -26,12 +25,12 @@ class Verbalizer:
 		return " ".join(tokens)
 	
 
-	def kg_to_text(self,kg,query,keyword,max=5,by_name=True,by_properties=True,by_description=True):
+	def kg_to_text(self,kg,query,keyword,max_resources=5,by_name=True,by_properties=True,by_description=True):
 		sentences = []
 		kg_resources = kg.find_resources(keyword)
 		self.logger.debug("KG Candidates: " + str(len(kg_resources)))
 		# get top MAX resources
-		top_resources = self.graph.get_top_resources(query,keyword,kg_resources,max,by_name,by_properties,by_description)
+		top_resources = self.graph.get_top_resources(query,keyword,kg_resources,max_resources,by_name,by_properties,by_description)
 		self.logger.debug("Top KG Resources: " + str(len(top_resources)))
 		# get top MAX properties for each resource
 		for resource in top_resources:
@@ -51,17 +50,8 @@ class Verbalizer:
 						sentences.append(t)
 		return sentences
 
+	def db_to_text(self, db, query, keyword,max_texts=5):
+		db_texts = db.find_texts(query,keyword,max_texts)
+		self.logger.debug("DB Texts: " + str(len(db_texts)))
+		return db_texts
 
-	def get_text(self,query,keyword,max=5,wikipedia=True,dbpedia=True,d4c=True,by_name=True,by_properties=True,by_description=True):
-		sentences = []
-		if (wikipedia):
-			wiki_sentences = self.kg_to_text(self.wikipedia,query,keyword,max,by_name,by_properties,by_description)
-			self.logger.debug("wiki sentences:" + str(wiki_sentences))
-			sentences.extend(wiki_sentences)
-
-		if (dbpedia):
-			dbpedia_sentences = self.kg_to_text(self.dbpedia,query,keyword,max,by_name,by_properties,by_description)
-			self.logger.debug("dbpedia sentences:" + str(dbpedia_sentences))
-			sentences.extend(dbpedia_sentences)
-
-		return sentences
