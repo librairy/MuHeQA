@@ -17,13 +17,11 @@ class D4C:
 		self.concept_discovery = cc.Concept()
 
 
-	def find_texts(self,query,keyword,max=5):
+	def find_texts(self,query,keywords,max=5):
 		if (self.cache.exists(query)):
 			return self.cache.get(query)
-		terms = self.concept_discovery.get(query)
-		if (keyword not in terms):
-			terms.append(keyword)
-		q = " or ".join([ "text_t:"+t for t in terms])		
+		q = " or ".join([ "text_t:"+t for t in keywords])
+		self.logger.debug("query => " + q)		
 		connection = urlopen(self.url + '/select?fl=text_t&q='+urllib.parse.quote(q)+'&rows='+str(max)+'&wt=json')
 		response = json.load(connection)
 		self.logger.debug(str(response['response']['numFound']) + " documents found.")

@@ -103,7 +103,7 @@ class Wikipedia:
 	  return result
 
 	def find_resources(self, label):
-		self.logger.debug("getting summary from Wikipedia for resource:" + label)
+		self.logger.debug("getting summary from Wikipedia for label: " + label)
 		if (label==""):
 			return candidates
 		if (self.cache.exists(label)):

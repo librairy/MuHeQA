@@ -55,10 +55,12 @@ class DBpedia:
 
     def get_forward_property_value(self, entity, property):
         query_filter = "<http://dbpedia.org/resource/ENTITY> <PROPERTY> ?object"
+        self.logger.debug("fw property:" + str(property) + " of entity: " + str(entity))
         return self.get_property_value(query_filter.replace("ENTITY", entity).replace("PROPERTY", property))
 
     def get_backward_property_value(self, entity, property):
         query_filter = "?object <PROPERTY> <http://dbpedia.org/resource/ENTITY>"
+        self.logger.debug("bk property:" + str(property) + " of entity: " + str(entity))
         return self.get_property_value(query_filter.replace("ENTITY", entity).replace("PROPERTY", property))
 
     def get_properties(self, entity):

@@ -28,7 +28,7 @@ class Graph:
 	    return " ".join(result)
 
 	def sort_by_similarity(self,ref_text,texts):
-		cache_key = ref_text + ",".join(texts)
+		cache_key = "sort_by_similarity"+ref_text + ",".join(texts)
 		if (self.cache.exists(cache_key)):
 			return self.cache.get(cache_key)
 		sentences = [unidecode.unidecode(ref_text.strip())]
@@ -50,7 +50,7 @@ class Graph:
 		top_resources = []
 		if (len(resources) == 0):
 			return top_resources
-		cache_key = ref_text + str(max) + ",".join([c['text'] for c in resources])
+		cache_key = "get_top_similar"+ref_text + str(max) + ",".join([c['text'] for c in resources])
 		if (self.cache.exists(cache_key)):
 			return self.cache.get(cache_key)	
 		sorted_resources = self.sort_by_similarity(ref_text,[c['text'] for c in resources])  

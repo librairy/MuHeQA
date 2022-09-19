@@ -1,10 +1,10 @@
 import logging
 
-import application.summary.concept as cp
-import application.summary.entity as ent
+import application.summary.keywords.concept as cp
+import application.summary.keywords.entity as ent
 import unidecode
 
-class Keyword_Discovery:
+class Discovery:
 
 	def __init__(self):
 		self.logger = logging.getLogger('muheqa')

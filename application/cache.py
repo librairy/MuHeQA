@@ -1,14 +1,16 @@
 from fcache.cache import FileCache
 import hashlib
 import logging
+import os
 
 class Cache:
 
 	def __init__(self, name):
 		self.logger = logging.getLogger('muheqa')
-		self.logger.debug("initializing "+ name + " cache ...")
+		path = os.path.join('muheqa', name)
+		self.logger.debug("initializing "+ path + " cache ...")
 
-		self.file_cache = FileCache(name, flag='cs')
+		self.file_cache = FileCache(path, flag='cs')
 		num_elements = len(list(self.file_cache))
 		if (num_elements > 0):
 			print("Loading",num_elements,"elements from cache:",self.file_cache.cache_dir,"...")

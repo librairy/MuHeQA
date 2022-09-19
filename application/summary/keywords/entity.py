@@ -10,6 +10,7 @@ class Entity:
 		self.logger = logging.getLogger('muheqa')
 		self.logger.debug("initializing Entity class instance...")
 
+		self.logger.debug("loading NER model ...")
 		ner_language_model = "dslim/bert-base-NER-uncased"
 		ner_tokenizer = AutoTokenizer.from_pretrained(ner_language_model)
 		ner_model = AutoModelForTokenClassification.from_pretrained(ner_language_model)

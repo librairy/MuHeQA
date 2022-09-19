@@ -1,6 +1,8 @@
 import logging
 import requests
 import application.cache as ch
+import application.summary.keywords.concept as cp
+import application.summary.keywords.discovery as kw
 import application.summary.texts.verbalizer as vb
 import application.summary.resources.wikipedia as kg_wikipedia
 import application.summary.resources.dbpedia as kg_dbpedia
@@ -12,7 +14,9 @@ class Summarizer:
 		self.cache = ch.Cache("Summarizer")
 		self.logger = logging.getLogger('muheqa')
 		self.logger.debug("initializing Summarizer ...")
-		
+	
+		self.concept 	= cp.Concept()
+		self.keywords 	= kw.Discovery()		
 		self.verbalizer = vb.Verbalizer()		
 		self.wikipedia 	= kg_wikipedia.Wikipedia()
 		self.dbpedia 	= kg_dbpedia.DBpedia()
@@ -20,24 +24,42 @@ class Summarizer:
 
 
 
-	def get_texts(self,query,keyword,max=5,wikipedia=True,dbpedia=True,d4c=True,by_name=True,by_properties=True,by_description=True):
-		key = query + keyword + str(max)
+	def get_sentences(self,query,max_resources=5,wikipedia=True,dbpedia=True,d4c=True,by_name=True,by_properties=True,by_description=True):
+		self.logger.debug("query: " + query)
+		key = query + str(max_resources)
 		if (self.cache.exists(query)):
 			return self.cache.get(query)
+
+		# Create Summary
 		sentences = []
-		if (wikipedia):
-			wiki_sentences = self.verbalizer.kg_to_text(self.wikipedia,query,keyword,max,by_name,by_properties,by_description)
-			self.logger.debug("wiki sentences:" + str(wiki_sentences))
-			sentences.extend(wiki_sentences)
 
-		if (dbpedia):
-			dbpedia_sentences = self.verbalizer.kg_to_text(self.dbpedia,query,keyword,max,by_name,by_properties,by_description)
-			self.logger.debug("dbpedia sentences:" + str(dbpedia_sentences))
-			sentences.extend(dbpedia_sentences)
+		## Keywords to search KG Resources
+		keywords = self.keywords.get(query)
+		self.logger.debug("keywords: " + str(keywords))
 
+		for kw in keywords:
+			if (wikipedia):
+				wiki_sentences = self.verbalizer.kg_to_text(self.wikipedia,query,kw,max_resources,by_name,by_properties,by_description)
+				self.logger.debug("wiki sentences:" + str(wiki_sentences))
+				sentences.extend(wiki_sentences)
+
+			if (dbpedia):
+				dbpedia_sentences = self.verbalizer.kg_to_text(self.dbpedia,query,kw,max_resources,by_name,by_properties,by_description)
+				self.logger.debug("dbpedia sentences:" + str(dbpedia_sentences))
+				sentences.extend(dbpedia_sentences)
+
+		## Concepts to search texts
 		if (d4c):
-			rows = max * 5
-			d4c_sentences = self.verbalizer.db_to_text(self.d4c, query, keyword,rows)
+
+			terms = self.concept.get(query)
+			self.logger.debug("Concepts: " + str(terms))
+			if (len(terms) <1):
+				terms = keywords
+
+			rows = 3
+			if (max_resources > 1):
+				rows = max_resources*2
+			d4c_sentences = self.verbalizer.db_to_text(self.d4c, query, terms, rows)
 			self.logger.debug("d4c sentences:" + str(d4c_sentences))
 			sentences.extend(d4c_sentences)			
 
