@@ -2,6 +2,7 @@ import logging
 import application.cache as ch
 import application.summary.kg.graph as kg_graph
 import application.summary.kg.wikipedia as kg_wikipedia
+import application.summary.kg.dbpedia as kg_dbpedia
 
 
 class Verbalizer:
@@ -11,8 +12,9 @@ class Verbalizer:
 		self.logger = logging.getLogger('muheqa')
 		self.logger.debug("initializing Verbalizer ...")
 
-		self.graph = kg_graph.Graph()
-		self.wikipedia = kg_wikipedia.Wikipedia()
+		self.graph 		= kg_graph.Graph()
+		self.wikipedia 	= kg_wikipedia.Wikipedia()
+		self.dbpedia 	= kg_dbpedia.DBpedia()
 		
 	def property_to_text(self,s,p,o):
 		if (len(o)==0):
@@ -56,5 +58,10 @@ class Verbalizer:
 			wiki_sentences = self.kg_to_text(self.wikipedia,query,keyword,max,by_name,by_properties,by_description)
 			self.logger.debug("wiki sentences:" + str(wiki_sentences))
 			sentences.extend(wiki_sentences)
+
+		if (dbpedia):
+			dbpedia_sentences = self.kg_to_text(self.dbpedia,query,keyword,max,by_name,by_properties,by_description)
+			self.logger.debug("dbpedia sentences:" + str(dbpedia_sentences))
+			sentences.extend(dbpedia_sentences)
 
 		return sentences
