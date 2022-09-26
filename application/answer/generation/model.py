@@ -9,8 +9,6 @@ class ModelEN:
 
     def get_response(self, category, evidence):
         response = {}
-        response['confidence'] = evidence['score']
-        response['evidence'] = evidence['summary']   
         if (category['category'] == 'resource'):
             response['type'] = 'literal'
             response['answer'] = evidence['value']
@@ -23,4 +21,6 @@ class ModelEN:
                 response['answer'] = len(evidence['value'].split(","))
             else:
                 response['answer'] = 1
+        response['confidence'] = evidence['score']
+        response['evidence'] = evidence['summary']   
         return response

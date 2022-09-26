@@ -12,11 +12,11 @@ class Composer:
 		self.classifier 	= cl.QuestionClassifier("./resources_dir")
 
 
-	def get_answer(self, question, evidences):
+	def get_answers(self, question, evidences, max=3):
 		category = self.classifier.get_category(question)
 		self.logger.debug("Question Analysis: " + str(category))
 		answers = []
 		for e in evidences:
 			answer = self.model.get_response(category,e)
 			answers.append(answer)
-		return answers
+		return answers[:max]

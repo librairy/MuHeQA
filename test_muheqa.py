@@ -1,20 +1,12 @@
 import test_logger
-import application.summary.summarizer as sm
-import application.evidence.discoverer as ds
+import application.pipe as pp
 
-summarizer = sm.Summarizer()
-discoverer = ds.Discoverer()
-
-question = "What position does Carlos Gomez play?"
-
-print("Question:",question)
+pipe = pp.Pipe()
 
 
-sentences = summarizer.get_sentences(question,max_resources=3,wikipedia=True,dbpedia=True,d4c=True,by_name=True,by_properties=True,by_description=True)
+question  = "What position does Carlos Gomez play in a football match?"
+answers   = pipe.get_responses(question,max_answers=3)
 
-evidences = discoverer.get_evidences(question,sentences,max=3)
-
-
-print("#### EVIDENCES: ")
-for e in evidences:
-	print("Evidence: ", e)
+print("#### ANSWERS: ")
+for a in answers:
+	print("Answer:",a)
