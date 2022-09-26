@@ -1,10 +1,12 @@
 import test_logger
-import application.summary.db.d4c as db_d4c
+import application.summary.resources.d4c as db_d4c
 
 d4c = db_d4c.D4C()
 
 
-query = "What position does Carlos Gomez play?"
-keyword = "Carlos Gomez"
+query = "What is the treatment of Hydroxychloroquine?"
+keywords = ["Hydroxychloroquine"]
 
-resources = d4c.find_texts(keyword,5)
+resources = d4c.find_texts(query,keywords,5)
+for r in resources:
+	print("Resource:",r)

@@ -17,13 +17,13 @@ class Splitter:
 		documents = []
 		for s in sentences:
 			num_tokens = len(s.split(" "))	
-			if ((counter + num_tokens) > max_lenght):
+			doc_sentences.append(s)
+			counter += num_tokens
+			if (counter > max_lenght):
 				document = " . ".join(doc_sentences)
 				documents.append(document)
 				doc_sentences = []
-				counter = 0
-			doc_sentences.append(s)
-			counter += num_tokens
+				counter = 0			
 		if (len(doc_sentences)>0):
 			document = " . ".join(doc_sentences)
 			documents.append(document)

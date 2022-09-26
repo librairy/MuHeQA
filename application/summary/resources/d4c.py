@@ -27,6 +27,7 @@ class D4C:
 		self.logger.debug(str(response['response']['numFound']) + " documents found.")
 		sentences = []
 		for document in response['response']['docs']:
+			print(document)
 			sentences.append(document['text_t'])
 		self.cache.set(query,sentences)	
 		return sentences
