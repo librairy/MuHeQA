@@ -1,0 +1,9 @@
+version: '3.7'
+
+services:
+ muheqa:
+  container_name: muheqa
+  image: librairy/muheqa:latest
+  ports:
+   - "8000:8000"
+  restart: always

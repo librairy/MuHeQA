@@ -1,0 +1,2 @@
+#docker build -t librairy/muheqa:latest .
+docker buildx build --platform=linux/amd64 -t librairy/muheqa:latest .

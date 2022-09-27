@@ -1,0 +1,9 @@
+.spyproject/**
+.git/**
+resources_dir/**
+datasets/**
+__pycache__/**
+**/__pycache__/**
+*.ipynb
+.gitignore
+.ipynb_checkpoints
