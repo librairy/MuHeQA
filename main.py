@@ -24,12 +24,12 @@ pipe = pp.Pipe()
 app = FastAPI()
 #app = FastAPI(root_path=os.environ.get('VIRTUAL_PATH'))
 
-@app.get("/qa")
+@app.get("/")
 def read_root():
 	return { "Hello":"World"}
 
-@app.get("/qa/answers")
-def read_item(q: str, max: Union[int, None] = None, wiki: Union[bool, None] = True, dbpedia: Union[bool, None] = True, d4c: Union[bool, None] = True):
+@app.get("/answers")
+def read_item(q: str, max: Union[int, None] = 1, wiki: Union[bool, None] = True, dbpedia: Union[bool, None] = True, d4c: Union[bool, None] = True):
 	question = { 'q':q, 'max':max, 'wiki':wiki, 'dbpedia':dbpedia, 'd4c':d4c}
 	logger.info("New question: " + str(question) + "...")
 	answers = pipe.get_responses(q,max_answers=max,max_resources=3,wikipedia=wiki,dbpedia=dbpedia,d4c=d4c)
