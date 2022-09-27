@@ -36,6 +36,7 @@ class Verbalizer:
 		
 		# get top properties for each resource
 		for resource in top_resources:
+			self.logger.debug("Top Resource: '" + str(resource['id'])+ "'")
 			if ('properties' in resource):
 				properties = [{ 'id':r['id'] , 'text':r['value']} for r in resource['properties']]
 				top_properties = self.graph.get_top_similar(query.replace(keyword,""),properties, 5)

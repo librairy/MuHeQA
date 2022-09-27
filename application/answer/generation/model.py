@@ -22,5 +22,7 @@ class ModelEN:
             else:
                 response['answer'] = 1
         response['confidence'] = evidence['score']
-        response['evidence'] = evidence['summary']   
+        response['evidence'] = evidence['summary']
+        response['start'] = evidence['start']
+        response['end'] = evidence['end']
         return response

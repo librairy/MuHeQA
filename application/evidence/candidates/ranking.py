@@ -20,6 +20,7 @@ class Ranking:
 		top_evidences = []
 		for index, c in enumerate(evidences):
 			if (n < 0) or (index < n) or (c['score'] == best_score):
-				top_evidences.append(c)
+				if (c['score'] > 0):
+					top_evidences.append(c)
 		return top_evidences
 		

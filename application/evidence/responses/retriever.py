@@ -22,7 +22,7 @@ class Retriever:
 				return evidence
 			result = self.question_answerer(question=question, context=context, min_answer_len=1, max_answer_len=100)
 			score = round(result['score'], 1)			
-			evidence['value']=result['answer'].replace(","," ")
+			evidence['value']=result['answer']
 			evidence['score']=score
 			evidence['summary']=context
 			evidence['start']=result['start']

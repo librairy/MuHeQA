@@ -17,6 +17,9 @@ class Pipe:
 	def get_responses(self,question,max_answers=3,max_resources=3,wikipedia=True,dbpedia=True,d4c=True,by_name=True,by_properties=True,by_description=True):
 		self.logger.debug("Question: " + question)
 		sentences = self.summarizer.get_sentences(question,max_resources,wikipedia,dbpedia,d4c,by_name,by_properties,by_description)
+		if (len(sentences) == 0):
+			self.logger.warn("no summary created")
+			return sentences
 		evidences = self.discoverer.get_evidences(question,sentences,max_answers)
 		answers   = self.composer.get_answers(question,evidences,max_answers)
 		self.logger.debug("Answers: " + str(answers))

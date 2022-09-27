@@ -102,8 +102,7 @@ class DBpedia:
         candidates = []
         if (label == ""):
             return candidates
-        if (self.cache.exists(label)):
-            print("Cacheeee")
+        if (self.cache.exists(label)):            
             return self.cache.get(label)        
         headers = {
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
@@ -139,6 +138,7 @@ class DBpedia:
                 'description': description,
                 'properties': properties
             }
+            self.logger.debug("DBpedia resource candidate: '" + str(id) + "'")
             candidates.append(candidate)
         self.cache.set(label, candidates)
         return candidates

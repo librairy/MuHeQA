@@ -35,6 +35,10 @@ class Summarizer:
 
 		## Keywords to search KG Resources
 		keywords = self.keywords.get(query)
+		if (len(keywords) == 0):
+			self.logger.warn("no keywords found in question")
+			return sentences
+
 		self.logger.debug("keywords: " + str(keywords))
 
 		for kw in keywords:
