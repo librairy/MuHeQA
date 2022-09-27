@@ -12,6 +12,7 @@ class Ranking:
 		self.logger.debug("initializing Ranking ...")
 
 	def get_top_evidences(self,evidences,n=1):
+		self.logger.debug("top " + str(n) + " evidences from " + str(len(evidences)) + " evidences")
 		if (len(evidences)<2):
 			return evidences
 		evidences.sort(key=lambda x: x.get('score'),reverse=True)
