@@ -1,8 +1,7 @@
 FROM huggingface/transformers-tensorflow-cpu:4.18.0
 
-RUN pip install --upgrade pip
 COPY requirements.txt requirements.txt
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir --upgrade -r requirements.txt
 
 ENV LC_ALL=C.UTF-8
 ENV LANG=C.UTF-8
@@ -18,5 +17,4 @@ RUN  apt-get update -y && \
 RUN apt-get install -y unzip
 RUN unzip /app/resources.zip -d /app/
 
-#ENTRYPOINT ["python3"]
-CMD ["uvicorn","main:app"]
+CMD ["uvicorn","main:app","--host", "0.0.0.0", "--port", "8000"]
