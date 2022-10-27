@@ -50,7 +50,7 @@ class Concept:
 						current_concept += " " + token
 					elif (len(partial_concept)>0):
 						partial_concept += " " + token
-					elif (previous_token not in drop_categories):
+					elif (previous_token not in ['WRB','CC']):
 						partial_concept += token
 					else:
 						if (len(current_concept)>0):
