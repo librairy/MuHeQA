@@ -16,7 +16,7 @@ class Summarizer:
 		self.logger.debug("initializing Summarizer ...")
 	
 		self.concept 	= cp.Concept()
-		self.keywords 	= kw.Discovery()		
+		self.discovery 	= kw.Discovery()		
 		self.verbalizer = vb.Verbalizer()		
 		self.wikipedia 	= kg_wikipedia.Wikipedia()
 		self.dbpedia 	= kg_dbpedia.DBpedia()
@@ -25,23 +25,24 @@ class Summarizer:
 
 
 	def get_sentences(self,query,max_resources=5,wikipedia=True,dbpedia=True,d4c=True,by_name=True,by_properties=True,by_description=True):
-		self.logger.debug("query: " + query)
-		key = query + str(max_resources)
-		if (self.cache.exists(query)):
-			return self.cache.get(query)
+		key = query + str(max_resources) + str(wikipedia) + str(dbpedia) + str(d4c) + str(by_name) + str(by_properties) + str(by_description)
+		if (self.cache.exists(key)):
+			return self.cache.get(key)
 
 		# Create Summary
 		sentences = []
 
 		## Keywords to search KG Resources
-		keywords = self.keywords.get(query)
-		if (len(keywords) == 0):
+		keywords = self.discovery.get_keywords(query)
+		if ((len(keywords['entities']) == 0) and (len(keywords['concepts']) == 0)):
 			self.logger.warn("no keywords found in question")
 			return sentences
 
 		self.logger.debug("keywords: " + str(keywords))
-
-		for kw in keywords:
+		keys = keywords['entities']
+		if (len(keys) == 0):
+			keys =  keywords['concepts']
+		for kw in keys:
 			if (wikipedia):
 				wiki_sentences = self.verbalizer.kg_to_text(self.wikipedia,query,kw,max_resources,by_name,by_properties,by_description)
 				self.logger.debug("wiki sentences:" + str(wiki_sentences))
@@ -55,16 +56,14 @@ class Summarizer:
 		## Concepts to search texts
 		if (d4c):
 
-			terms = self.concept.get(query)
-			self.logger.debug("Concepts: " + str(terms))
-			if (len(terms) <1):
-				terms = keywords
-
+			self.logger.debug("Concepts: " + str(keywords['concepts']))
+			
 			rows = 3
 			if (max_resources > 1):
 				rows = max_resources*2
-			d4c_sentences = self.verbalizer.db_to_text(self.d4c, query, terms, rows)
-			self.logger.debug("d4c sentences:" + str(d4c_sentences))
+			d4c_sentences = self.verbalizer.db_to_text(self.d4c, query, keywords['entities'], keywords['concepts'], rows)
+			self.logger.debug("d4c sentences:" + str(len(d4c_sentences)))
 			sentences.extend(d4c_sentences)			
 
+		self.cache.set(key,sentences)	
 		return sentences

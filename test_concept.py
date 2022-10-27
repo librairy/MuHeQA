@@ -1,12 +1,11 @@
 import test_logger
-import application.summary.concept as cc
+import application.summary.keywords.concept as cc
 
 concept = cc.Concept()
 
 
-query = "What position does Carlos Gomez play?"
-keyword = "Carlos Gomez"
+query = "What is the advantage of the VEE replicon system?"
 
-
+print(query)
 for r in concept.get(query):
 	print("Concept:", r)

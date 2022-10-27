@@ -1,0 +1,3 @@
+Siriwardhana, Shamane, Rivindu Weerasekera, Elliott Wen, Tharindu Kaluarachchi, Rajib Kumar Rana and Suranga Nanayakkara. “Improving the Domain Adaptation of Retrieval Augmented Generation (RAG) Models for Open Domain Question Answering.” This paper is awaiting publication at Transactions of the Association for Computational Linguistics. This is a pre-MIT Press publication version. For associated huggingface transformers code, see this https URL (2022)
+- code: https://github.com/huggingface/transformers/tree/main/examples/research_projects/rag-end2end-retriever
+- evaluation datasets: https://drive.google.com/drive/folders/1up3yKcJFArBQ6e0F_6n_mfW1VPHxA20A?usp=sharing

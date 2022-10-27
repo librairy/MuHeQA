@@ -17,8 +17,8 @@ class Concept:
 	def get(self,text):
 		self.logger.debug("getting concepts ...")
 		main_categories=['CD','NN','NNS','NNP','NNPS']
-		additional_categories=['JJ','NNS','CC']
-		drop_categories=['IN']
+		additional_categories=['JJ','NNS']
+		drop_categories=['IN','WRB','CC']
 
 		# make sentence
 		sentence = Sentence(text)
@@ -30,11 +30,13 @@ class Concept:
 		concepts = []
 		current_concept = ""
 		partial_concept = ""
+		previous_token = ""
 		for t in sentence.tokens:
 			for label in t.annotation_layers.keys():
 				token = t.text
 				category = t.get_labels(label)[0].value
-				self.logger.debug("Token:"+ token + " [ " + category + "] ")
+				self.logger.debug("Token:"+ token + " [ " + category + "]  Previous: [" + previous_token + "]")
+				#self.logger.debug("Current Concept: " + current_concept + ", Partial Concept: " + partial_concept)
 				if (category in main_categories):
 					if (len(partial_concept) > 0 ):
 						current_concept = partial_concept + " " + token
@@ -48,15 +50,24 @@ class Concept:
 						current_concept += " " + token
 					elif (len(partial_concept)>0):
 						partial_concept += " " + token
-					else:
+					elif (previous_token not in drop_categories):
 						partial_concept += token
+					else:
+						if (len(current_concept)>0):
+							concepts.append(current_concept)
+						current_concept = ""
+						partial_concept = ""
 				elif(category in drop_categories):
+					if (len(current_concept)>0):
+							concepts.append(current_concept)
 					current_concept = ""
 					partial_concept = ""
 				elif len(current_concept) > 0:
-					concepts.append(current_concept)
+					if (len(current_concept)>0):
+							concepts.append(current_concept)
 					current_concept = ""
 					partial_concept = ""
+			previous_token = t.get_labels(label)[0].value
 		if (len(current_concept) > 0):
 			concepts.append(current_concept)
 		return concepts

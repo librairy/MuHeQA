@@ -16,20 +16,15 @@ class Discovery:
 	def unicase(self,label):
   		return unidecode.unidecode(label.strip()).lower()
 
-	def get(self,text):
-		entities = self.entity_discovery.get(text)
+	def get_keywords(self,text):
 		concepts = [self.unicase(e) for e in self.concept_discovery.get(text)]
-		self.logger.debug("getting keywords from the entities:" + str(entities) + " and the concepts:" + str(concepts))
-		if (len(entities) == 0):
-			self.logger.debug("no entities found")
-			return concepts
-		keywords = []
+		result = { 'entities':[], 'concepts':concepts}
+		entities = self.entity_discovery.get(text)
 		for e in entities:
-			keyword = e
+			extended_entity = e
 			for c in concepts:
 				if (e in c):
-					keyword = c
-			keywords.append(keyword)	
-		if (len(keywords)>0):
-			return list(set(keywords))
-		return entities		
+					extended_entity = c
+			if (extended_entity not in result['entities']):
+				result['entities'].append(extended_entity)			
+		return result

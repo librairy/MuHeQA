@@ -6,6 +6,8 @@ class ModelEN:
         self.logger = logging.getLogger('muheqa')
         self.logger.debug("initializing Answer Model ...")        
 
+    def contains_number(self,text):
+        return any(char.isdigit() for char in text)    
 
     def get_response(self, category, evidence):
         response = {}
@@ -17,10 +19,14 @@ class ModelEN:
             response['answer'] = (evidence['score'] > 0.5)
         elif (len(category['type']) > 0) and (category['type'][0] == 'number'):
             response['type'] = 'number'
-            if (',' in evidence['value']):
+            if (self.contains_number(evidence['value'])):
+                response['answer'] = evidence['value']
+            elif (',' in evidence['value']):
                 response['answer'] = len(evidence['value'].split(","))
             else:
                 response['answer'] = 1
+        else:
+           response['answer'] = evidence['value'] 
         response['confidence'] = evidence['score']
         response['evidence'] = evidence['summary']
         response['start'] = evidence['start']

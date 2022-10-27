@@ -54,8 +54,8 @@ class Verbalizer:
 					#	sentences.append(t)
 		return sentences
 
-	def db_to_text(self, db, query, keywords,max_texts=5):
-		db_texts = db.find_texts(query,keywords,max_texts)
+	def db_to_text(self, db, query, keywords, concepts, max_texts=5):
+		db_texts = db.find_texts(query,keywords, concepts, max_texts)
 		self.logger.debug("DB Texts: " + str(len(db_texts)))
 		return db_texts
 

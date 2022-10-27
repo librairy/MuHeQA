@@ -21,6 +21,7 @@ class Pipe:
 			self.logger.warn("no summary created")
 			return sentences
 		evidences = self.discoverer.get_evidences(question,sentences,max_answers)
+		self.logger.debug("Evidences: " + str(evidences))
 		answers   = self.composer.get_answers(question,evidences,max_answers)
 		self.logger.debug("Answers: " + str(answers))
 		return answers

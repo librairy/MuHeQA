@@ -12,7 +12,10 @@ class Retriever:
 
 		self.logger.debug("loading eqa language model ...")
 		#qa_language_model = "deepset/roberta-base-squad2-covid" #roberta-covid
-		qa_language_model = "deepset/roberta-base-squad2" #roberta
+		#qa_language_model = "deepset/roberta-base-squad2" #roberta
+		qa_language_model = "shaina/covid_qa_mpnet" #CoQUAD
+
+
 		self.question_answerer = pipeline("question-answering", model=qa_language_model, tokenizer=qa_language_model)
 		
 	def get_evidence(self,question,context):

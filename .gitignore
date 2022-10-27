@@ -14,6 +14,7 @@ develop-eggs/
 dist/
 resources_dir/
 downloads/
+CovidQA/
 eggs/
 .eggs/
 lib/
