@@ -9,14 +9,16 @@ logging.getLogger('muheqa').setLevel(logging.INFO)
 pipe = pp.Pipe()
 
 counter = 1
-out = open("./datasets/CovidQA/test/test.responses", "w")
-with open('./datasets/CovidQA/test/test.source') as f:
+out = open("./datasets/NewsQA/test/test.responses", "w")
+with open('./datasets/NewsQA/test/test.source') as f:
 	for q in f.readlines():
 		print(counter,":",q)
 		answers   = pipe.get_responses(q,max_answers=1,wikipedia=False,dbpedia=False,d4c=True)
 		if (len(answers)>0):
-			out.write(str(answers[0]['answer']))
+			answer = str(answers[0]['answer'])
+			print("\t",answer)
+			out.write(answer)
 		out.write("\n")
-		counter += 1
+		counter += 1		
 out.close()
 
