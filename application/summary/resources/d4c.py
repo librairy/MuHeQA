@@ -13,8 +13,8 @@ class D4C:
 	def __init__(self):
 		self.logger = logging.getLogger('muheqa')
 		self.logger.debug("initializing D4C retriever...")
-		self.url = "http://librairy.linkeddata.es/solr/cord19-paragraphs"
-		#self.url = "http://localhost:8983/solr/documents"
+		#self.url = "http://librairy.linkeddata.es/solr/cord19-paragraphs"
+		self.url = "http://localhost:8983/solr/documents"
 		self.cache = ch.Cache("D4C")
 		self.concept_discovery = cc.Concept()
 		
@@ -33,18 +33,26 @@ class D4C:
 			q += "(" + " OR ".join([ "text_t:\""+t + "\"" for t in entities]) + ")"
 		
 		if (len(concepts)>0):
-			if (len(q)>0):
-				q += " AND "
-			q += "(" + " OR ".join([ "text_t:\""+t + "\"" for t in concepts]) +")"
+			unique_concepts = [ t for t in concepts if t not in entities]
+			if (len(unique_concepts)>0):
+				if (len(q)>0):
+					q += " AND "
+				q += "(" + " OR ".join([ "text_t:\""+t + "\"" for t in unique_concepts ]) +")"
 
 		self.logger.debug("query => " + q)		
 		connection = urlopen(self.url + '/select?fl=text_t,id&q='+urllib.parse.quote(q)+'&rows=50'+'&wt=json')
 		response = json.load(connection)
 		self.logger.debug( str(len(response['response']['docs'])) + "/" + str(response['response']['numFound']) + " documents found.")
 		if (response['response']['numFound'] == 0) and (len(concepts)>0):
-			q = "(" + " OR ".join([ "text_t:\""+t + "\"" for t in concepts]) +")"
+			tokens = []
+			for c in concepts:
+				for t in c.split(" "):
+					tokens.append(t)
+			q = "(" + " OR ".join([ "text_t:\""+t + "\"" for t in tokens]) +")"
+			self.logger.debug("query => " + q)
 			connection = urlopen(self.url + '/select?fl=text_t,id&q='+urllib.parse.quote(q)+'&rows=50'+'&wt=json')
 			response = json.load(connection)
+			self.logger.debug( str(len(response['response']['docs'])) + "/" + str(response['response']['numFound']) + " documents found.")
 		sentences = []
 		for document in response['response']['docs']:
 			

@@ -20,7 +20,7 @@ class Discoverer:
 		docs = self.splitter.get_documents(summary,max_tokens)
 		evidences = []
 		for d in docs:
-			evidence = self.retriever.get_evidence(question, d)
-			evidences.append(evidence)
+			for evidence in self.retriever.get_evidences(question, d):
+				evidences.append(evidence)
 		top_evidences = self.ranking.get_top_evidences(evidences,max)
 		return top_evidences
