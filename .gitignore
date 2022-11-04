@@ -5,16 +5,17 @@ __pycache__/
 
 # C extensions
 *.so
-
+*.db
 # Distribution / packaging
 .DS_Store
 .Python
+**/*.csv
+**/train/**
 build/
 develop-eggs/
 dist/
 resources_dir/
 downloads/
-CovidQA/
 eggs/
 .eggs/
 lib/
