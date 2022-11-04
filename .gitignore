@@ -10,7 +10,8 @@ __pycache__/
 .DS_Store
 .Python
 **/*.csv
-**/train/**
+**/training/**
+**/solr-data/**
 build/
 develop-eggs/
 dist/
