@@ -47,18 +47,23 @@ class D4C:
 			self.logger.error("Error getting data from " + self.url)
 			return []
 		self.logger.debug( str(len(response['response']['docs'])) + "/" + str(response['response']['numFound']) + " documents found.")
+		docs = response['response']['docs']
 		if (response['response']['numFound'] == 0) and (len(concepts)>0):
-			tokens = []
-			for c in concepts:
-				for t in c.split(" "):
-					tokens.append(t)
-			q = "(" + " OR ".join([ "text_t:\""+t + "\"" for t in tokens]) +")"
-			self.logger.debug("query => " + q)
-			connection = urlopen(self.url + '/select?fl=text_t,id&q='+urllib.parse.quote(q)+'&rows=50'+'&wt=json')
-			response = json.load(connection)
-			self.logger.debug( str(len(response['response']['docs'])) + "/" + str(response['response']['numFound']) + " documents found.")
+			try:
+				tokens = []
+				for c in concepts:
+					for t in c.split(" "):
+						tokens.append(t)
+				q = "(" + " OR ".join([ "text_t:\""+t + "\"" for t in tokens]) +")"
+				self.logger.debug("query => " + q)
+				connection = urlopen(self.url + '/select?fl=text_t,id&q='+urllib.parse.quote(q)+'&rows=50'+'&wt=json')
+				response = json.load(connection)
+				self.logger.debug( str(len(response['response']['docs'])) + "/" + str(response['response']['numFound']) + " documents found.")
+				docs = response['response']['docs']
+			except e:				
+				self.logger.error("error getting documents: " + str(e))
 		sentences = []
-		for document in response['response']['docs']:
+		for document in docs:
 			
 			doc_text = document['text_t']
 			
