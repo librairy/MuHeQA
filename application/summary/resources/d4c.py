@@ -70,9 +70,13 @@ class D4C:
 			#validate based on T5 instead of BM25 or TFIDF according to paper "Document Ranking with a Pretrained Sequence-to-Sequence Model" https://aclanthology.org/2020.findings-emnlp.63.pdf
 			# castorini/monot5-base-msmarco-10k
 			# castorini/monot5-3b-msmarco-10k
-			input_ids = self.tokenizer(query + " " + doc_text, return_tensors="pt").input_ids  # Batch size 1
-			outputs = self.model.generate(input_ids,max_new_tokens=1)
-			is_valid = self.tokenizer.decode(outputs[0], skip_special_tokens=True) == "true"
+			try:
+				input_ids = self.tokenizer(query + " " + doc_text, return_tensors="pt").input_ids  # Batch size 1
+				outputs = self.model.generate(input_ids,max_new_tokens=1)
+				is_valid = self.tokenizer.decode(outputs[0], skip_special_tokens=True) == "true"
+			except e:
+				self.logger.error("error in tokenizer: " + str(e))
+				is_valid = False				
 			#self.logger.debug(str(is_valid))
 			if (is_valid):			
 				sentences.append(doc_text)
