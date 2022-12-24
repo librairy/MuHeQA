@@ -13,8 +13,8 @@ class D4C:
 	def __init__(self):
 		self.logger = logging.getLogger('muheqa')
 		self.logger.debug("initializing D4C retriever...")
-		#self.url = "http://librairy.linkeddata.es/solr/cord19-paragraphs"
-		self.url = "http://localhost:8983/solr/documents"
+		self.url = "http://librairy.linkeddata.es/solr/cord19-paragraphs"
+		#self.url = "http://localhost:8983/solr/documents"
 		self.cache = ch.Cache("D4C")
 		self.concept_discovery = cc.Concept()
 		
@@ -40,8 +40,12 @@ class D4C:
 				q += "(" + " OR ".join([ "text_t:\""+t + "\"" for t in unique_concepts ]) +")"
 
 		self.logger.debug("query => " + q)		
-		connection = urlopen(self.url + '/select?fl=text_t,id&q='+urllib.parse.quote(q)+'&rows=50'+'&wt=json')
-		response = json.load(connection)
+		try:
+			connection = urlopen(self.url + '/select?fl=text_t,id&q='+urllib.parse.quote(q)+'&rows=50'+'&wt=json')
+			response = json.load(connection)
+		except:
+			self.logger.error("Error getting data from " + self.url)
+			return []
 		self.logger.debug( str(len(response['response']['docs'])) + "/" + str(response['response']['numFound']) + " documents found.")
 		if (response['response']['numFound'] == 0) and (len(concepts)>0):
 			tokens = []

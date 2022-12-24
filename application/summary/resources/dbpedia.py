@@ -108,7 +108,12 @@ class DBpedia:
             'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
         query_path = "https://lookup.dbpedia.org/api/search?format=JSON&query=QUERY_TEXT&maxResults=10"
         request = query_path.replace("QUERY_TEXT", label)
-        r = requests.get(request, headers=headers)
+        try:
+            print("getting data from Dbpedia lookup service")
+            r = requests.get(request, headers=headers)
+        except:
+            self.logger.error("An error getting data from DBpedia lookup service: ")
+            return []
         if (len(r.json()['docs']) == 0):
             r = requests.get(query_path.replace("QUERY_TEXT", lemmatize(label)))
             self.logger.debug("no resources found in DBpedia for label: " + label + ", retried with: " + lemmatize(label))
