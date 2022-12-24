@@ -66,17 +66,19 @@ class D4C:
 		for document in docs:
 			
 			doc_text = document['text_t']
-			
-			#validate based on T5 instead of BM25 or TFIDF according to paper "Document Ranking with a Pretrained Sequence-to-Sequence Model" https://aclanthology.org/2020.findings-emnlp.63.pdf
-			# castorini/monot5-base-msmarco-10k
-			# castorini/monot5-3b-msmarco-10k
-			try:
-				input_ids = self.tokenizer(query + " " + doc_text, return_tensors="pt").input_ids  # Batch size 1
-				outputs = self.model.generate(input_ids,max_new_tokens=1)
-				is_valid = self.tokenizer.decode(outputs[0], skip_special_tokens=True) == "true"
-			except e:
-				self.logger.error("error in tokenizer: " + str(e))
-				is_valid = False				
+			is_valid = False
+			if (len(doc_text) > 0 ) and (len(doc_text.split(" "))<512):
+				#validate based on T5 instead of BM25 or TFIDF according to paper "Document Ranking with a Pretrained Sequence-to-Sequence Model" https://aclanthology.org/2020.findings-emnlp.63.pdf
+				# castorini/monot5-base-msmarco-10k
+				# castorini/monot5-3b-msmarco-10k
+				try:
+					input_ids = self.tokenizer(query + " " + doc_text, return_tensors="pt").input_ids  # Batch size 1
+					outputs = self.model.generate(input_ids,max_new_tokens=1)
+					is_valid = self.tokenizer.decode(outputs[0], skip_special_tokens=True) == "true"
+				except e:
+					self.logger.error("error in tokenizer: " + str(e))
+			else:
+				self.logger.warn("document length greater than max tokenizer")								
 			#self.logger.debug(str(is_valid))
 			if (is_valid):			
 				sentences.append(doc_text)
