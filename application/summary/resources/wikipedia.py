@@ -1,6 +1,7 @@
 import logging
 import requests
 import application.cache as ch
+import application.summary.resources.graph as kg_graph
 
 from SPARQLWrapper import SPARQLWrapper, JSON
 
@@ -8,12 +9,13 @@ from SPARQLWrapper import SPARQLWrapper, JSON
 class Wikipedia:
 
 	def __init__(self):
-		self.logger = logging.getLogger('muheqa')
+		self.logger 	= logging.getLogger('muheqa')
 		self.logger.debug("initializing Wikipedia retriever...")
-		self.sparql = SPARQLWrapper("https://query.wikidata.org/sparql",agent='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36')
+		self.sparql 	= SPARQLWrapper("https://query.wikidata.org/sparql",agent='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36')
 		self.sparql.setReturnFormat(JSON)
 		self.sparql.setTimeout(timeout=60)
-		self.cache = ch.Cache("Wikipedia")
+		self.cache 		= ch.Cache("Wikipedia")
+		self.graph 		= kg_graph.Graph()
 
 	def get_property_value(self,filter):
 		if (self.cache.exists(filter)):
@@ -114,7 +116,7 @@ class Wikipedia:
 		request = query_path.replace("QUERY_TEXT",label)
 		r = requests.get(request,headers = headers)
 		if (len(r.json()['search']) == 0):
-			lemma = lemmatize(label)	
+			lemma = self.graph.lemmatize(label)	
 			self.logger.debug("retry search by lemma:" + str(lemma))
 			r = requests.get(query_path.replace("QUERY_TEXT",lemma))
 			size = len(label.split(" "))
